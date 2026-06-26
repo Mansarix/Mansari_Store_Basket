@@ -1,0 +1,31 @@
+### Get or Create Basket
+GET {{baseUrl}}/api/v1/basket/{{userId}}
+Accept: application/json
+
+### Add Item to Basket
+POST {{baseUrl}}/api/v1/basket/{{userId}}/items
+Content-Type: application/json
+Accept: application/json
+
+{
+  "productId": 101,
+  "quantity": 2,
+  "unitPrice": 49.99
+}
+
+### Update Item Quantity
+PUT {{baseUrl}}/api/v1/basket/{{userId}}/items/{{productId}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "quantity": 5
+}
+
+### Remove Item from Basket
+DELETE {{baseUrl}}/api/v1/basket/{{userId}}/items/{{productId}}
+Accept: application/json
+
+### Clear Basket
+DELETE {{baseUrl}}/api/v1/basket/{{userId}}
+Accept: application/json
