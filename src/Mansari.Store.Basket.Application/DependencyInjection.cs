@@ -1,7 +1,8 @@
-﻿using Mansari.Store.Basket.Application.Common.Dispatchers;
+﻿using FluentValidation;
+using Mansari.Store.Basket.Application.Common.Behaviors;
+using Mansari.Store.Basket.Application.Common.Dispatchers;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Mansari.Store.Basket.Application.Common.Behaviors;
 
 namespace Mansari.Store.Basket.Application;
 
@@ -11,9 +12,9 @@ public static class DependencyInjection
     {
         var assembly = typeof(DependencyInjection).Assembly;
 
-        //services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
+        services.AddMediatR(assembly);
 
-        //services.AddValidatorsFromAssembly(assembly);
+        services.AddValidatorsFromAssembly(assembly);
 
         services.AddScoped<ICommandDispatcher, CommandDispatcher>();
         services.AddScoped<IQueryDispatcher, QueryDispatcher>();
