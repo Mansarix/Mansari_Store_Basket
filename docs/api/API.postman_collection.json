@@ -1,0 +1,247 @@
+{
+  "info": {
+    "name": "Mansari Store - Basket API",
+    "description": "مستندسازی API سبد خرید میکروسرویس Basket",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "productId",
+      "value": "101",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get or Create Basket",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/basket/{{userId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "basket", "{{userId}}"]
+        },
+        "description": "دریافت سبد فعال کاربر یا ایجاد سبد جدید"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/basket/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "basket", "{{userId}}"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"سبد خرید با موفقیت دریافت شد\",\n  \"data\": {\n    \"id\": 1,\n    \"userId\": 1,\n    \"status\": \"Active\",\n    \"items\": [\n      {\n        \"productId\": 101,\n        \"quantity\": 2,\n        \"unitPrice\": 250000.50,\n        \"totalPrice\": 500001.00\n      }\n    ],\n    \"totalPrice\": 500001.00,\n    \"createdAt\": \"2026-06-26T10:30:00Z\",\n    \"lastUpdatedAt\": \"2026-06-26T10:35:00Z\"\n  },\n  \"errors\": null\n}"
+        }
+      ]
+    },
+    {
+      "name": "Add Item to Basket",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"productId\": {{productId}},\n  \"quantity\": 2,\n  \"unitPrice\": 250000.50\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/basket/{{userId}}/items",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "basket", "{{userId}}", "items"]
+        },
+        "description": "افزودن کالا به سبد خرید"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": 101,\n  \"quantity\": 2,\n  \"unitPrice\": 250000.50\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/basket/{{userId}}/items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "basket", "{{userId}}", "items"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"کالا با موفقیت به سبد خرید اضافه شد\",\n  \"data\": {\n    \"id\": 1,\n    \"userId\": 1,\n    \"status\": \"Active\",\n    \"items\": [\n      {\n        \"productId\": 101,\n        \"quantity\": 2,\n        \"unitPrice\": 250000.50,\n        \"totalPrice\": 500001.00\n      }\n    ],\n    \"totalPrice\": 500001.00,\n    \"createdAt\": \"2026-06-26T10:30:00Z\",\n    \"lastUpdatedAt\": \"2026-06-26T10:35:00Z\"\n  },\n  \"errors\": null\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Item Quantity",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 5\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/basket/{{userId}}/items/{{productId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "basket", "{{userId}}", "items", "{{productId}}"]
+        },
+        "description": "تغییر تعداد یک کالای موجود در سبد"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/basket/{{userId}}/items/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "basket", "{{userId}}", "items", "{{productId}}"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"تعداد کالا با موفقیت به‌روزرسانی شد\",\n  \"data\": {\n    \"id\": 1,\n    \"userId\": 1,\n    \"status\": \"Active\",\n    \"items\": [\n      {\n        \"productId\": 101,\n        \"quantity\": 5,\n        \"unitPrice\": 250000.50,\n        \"totalPrice\": 1250002.50\n      }\n    ],\n    \"totalPrice\": 1250002.50,\n    \"createdAt\": \"2026-06-26T10:30:00Z\",\n    \"lastUpdatedAt\": \"2026-06-26T10:40:00Z\"\n  },\n  \"errors\": null\n}"
+        }
+      ]
+    },
+    {
+      "name": "Remove Item from Basket",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/basket/{{userId}}/items/{{productId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "basket", "{{userId}}", "items", "{{productId}}"]
+        },
+        "description": "حذف یک کالا از سبد خرید"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/basket/{{userId}}/items/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "basket", "{{userId}}", "items", "{{productId}}"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"کالا با موفقیت از سبد خرید حذف شد\",\n  \"errors\": null\n}"
+        }
+      ]
+    },
+    {
+      "name": "Clear Basket",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/basket/{{userId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "basket", "{{userId}}"]
+        },
+        "description": "حذف تمام آیتم‌های سبد خرید"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/basket/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "basket", "{{userId}}"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"سبد خرید با موفقیت پاک شد\",\n  \"errors\": null\n}"
+        }
+      ]
+    }
+  ]
+}
