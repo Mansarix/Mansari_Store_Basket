@@ -1,8 +1,6 @@
 ﻿using Mansari.Store.Basket.API.Middlewares;
 using Mansari.Store.Basket.Application;
 using Mansari.Store.Basket.Infrastructure;
-using Microex.Swagger.Application;
-using Microex.Swagger.SwaggerGen.Application;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
