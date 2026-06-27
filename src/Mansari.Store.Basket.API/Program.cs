@@ -1,11 +1,13 @@
 using Mansari.Store.Basket.API.Middlewares;
 using Mansari.Store.Basket.Application;
 using Mansari.Store.Basket.Infrastructure;
+using Microex.Swagger.Application;
+using Microex.Swagger.SwaggerGen.Application;
+using Microex.Swagger.SwaggerUI;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// MVC / Controllers
 builder.Services
     .AddControllers()
     .ConfigureApiBehaviorOptions(options =>
@@ -23,7 +25,10 @@ builder.Services
     });
 
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(options =>
+{
+});
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -34,8 +39,12 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    //app.UseSwagger();
-    //app.UseSwaggerUI();
+    app.UseSwagger();
+
+    app.UseSwaggerUI3(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Basket API v1");
+    });
 }
 
 app.MapHealthChecks("/health");
